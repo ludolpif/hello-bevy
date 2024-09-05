@@ -1,4 +1,4 @@
-.PHONY: all build-dep build run doc
+.PHONY: all build-dep build build-release run doc
 
 all: run
 
@@ -10,6 +10,12 @@ build:
 
 run:
 	cargo run
+
+build-release:
+	cargo build --no-default-features --release
+
+run-release:
+	cargo run --no-default-features --release
 
 doc:
 	echo "Warning: rustdoc in 2024 may hang indefinitely on wgpu-doc"
