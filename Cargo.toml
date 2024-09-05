@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bevy = { version = "0.14.1", features = ["dynamic_linking"] }
+bevy = { version = "0.14.1", features = ["bevy_dev_tools", "dynamic_linking"] }
 
 # from: https://bevyengine.org/learn/quick-start/getting-started/setup/#dynamic-linking
 

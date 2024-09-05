@@ -34,13 +34,13 @@ editor .cargo/config.toml
 # from: https://bevyengine.org/learn/quick-start/getting-started/apps/
 editor src/main.rs
 
-make
+make # shows an empty window and a console "Hello, World!"
 
 editor README.md
 editor NOTES.md
 
-git add .
 git status
+git add .
 git commit -m "project initialization"
 
 dpkg-query -f='${binary:Package;-32} ${Version}\n' -W '*' | grep -E '^(cargo|clang|lld|pkg-config|libx11-dev|libasound2-dev|libudev-dev|libxkbcommon-x11-0|libwayland-dev|libxkbcommon-dev|rustc)[: ]'
@@ -55,4 +55,17 @@ dpkg-query -f='${binary:Package;-32} ${Version}\n' -W '*' | grep -E '^(cargo|cla
 #lld:amd64                        1:16.0-58.1
 #pkg-config:amd64                 1.8.1-3
 #rustc                            1.79.0+dfsg1-2
+
+cargo add bevy -F bevy_dev_tools
+editor src/playground.rs
+editor src/main.rs
+
+make # shows a FPS counter
+
+editor NOTES.md
+
+git status
+git add .
+git commit -m "split main.rs creating a playground.rs module. add basic FPS overlay"
+
 ```
