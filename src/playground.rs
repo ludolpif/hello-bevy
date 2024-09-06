@@ -11,7 +11,11 @@ impl Plugin for HelloPlugin {
 
 impl HelloPlugin {
     fn hello_world() {
-        println!("Hello, world!");
+        trace!("tracing");
+        debug!("solving issues...");
+        info!("hello :)");
+        warn!("spooky warning");
+        error!("scary error");
     }
 }
 
