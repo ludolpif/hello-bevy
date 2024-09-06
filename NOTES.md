@@ -1,6 +1,6 @@
 # Notes
 
-# Project very start
+## Project very start
 
 Read: https://www.rust-lang.org/learn/get-started
 
@@ -71,3 +71,55 @@ git status
 git add .
 git commit -m "split main.rs creating a playground.rs module. add basic FPS overlay"
 ```
+
+## Develpement environnement configuration
+
+On a debian trixie, make sure that `./build-dep-system` and `./build-dep-user` have been ran. Check `rust-analyser` availability:
+
+```
+$ rust-analyzer --version
+rust-analyzer 1.81.0 (eeb90cd 2024-09-04)
+```
+
+Then install some system-wide vim packages:
+```sh
+sudo apt install vim vim-ale vim-syntastic
+```
+Then set current use `~/.vimrc` with:
+```vim
+runtime! defaults.vim
+runtime! debian.vim
+if &diff
+  syntax off
+else
+  set mouse=
+end
+set background=dark
+
+filetype plugin indent on
+
+" vim-ale, usage: https://github.com/dense-analysis/ale?tab=readme-ov-file#usage
+packadd! ale
+let g:ale_linters = {'rust': ['analyzer']}
+let g:ale_virtualtext_cursor = 'current'
+let g:ale_set_highlights = 0
+let g:ale_sign_column_always = 1
+" You should not turn this setting on if you wish to use ALE as a completion
+" source for other completion plugins, like Deoplete.
+let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc
+"let g:ale_completion_autoimport = 0
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+EOT
+```
+
+- `vim src/main.rs`
+- `:set filetype` should return `=rust`
+- `:ALEInfo` should contain : `Enabled Linters: ['analyzer']`
+- mangle the end of some struct defined in devmode crate
+- press `Ctrl+X Ctrl+O` to force `ale` to generate a first omni-completion
+- use `Ctrl+N` to choose a completion proposition (then return)
+- now omnicompletion should trigger itself automatically
+- code errors are checked only at file save. juste `:w` and see virtual text where the gutter indicate it.
