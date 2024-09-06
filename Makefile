@@ -3,7 +3,8 @@
 all: run
 
 build-dep:
-	./build-dep.sh
+	sudo ./build-dep-system.sh
+	./build-dep-user.sh
 
 build:
 	cargo build

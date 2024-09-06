@@ -6,15 +6,16 @@ edition = "2021"
 # from: https://doc.rust-lang.org/cargo/reference/features.html
 # and: https://docs.rs/bevy/latest/bevy/index.html#cargo-features
 [dependencies]
-bevy = { version = "0.14.1", features = ["bevy_dynamic_plugin", "jpeg", "symphonia-all", "sysinfo_plugin", "wayland", "webp"] }
+bevy = { version = "0.14.1", features = ["bevy_dynamic_plugin", "jpeg", "symphonia-all", "sysinfo_plugin", "webp"] }
 bevy_dev_console = { git = "https://github.com/doonv/bevy_dev_console.git", version = "0.1.0" , optional = true}
 
 # from: https://bevyengine.org/learn/quick-start/getting-started/setup/#dynamic-linking
 # then: https://docs.rs/bevy/latest/bevy/dev_tools/struct.DevToolsPlugin.html
 [features]
-default = ["dev_mode"] # not a good practice if we were a reusable crate, seems okay for a game
+default = ["dev_mode", "wayland"] # not a good practice if we were a reusable crate, seems okay for a game
 dev_mode = ["dep:bevy_dev_console", "bevy/dynamic_linking", "bevy/bevy_dev_tools"]
 # , "bevy/bevy_debug_stepping", "bevy/detailed_trace", "bevy/trace_tracy", "bevy/trace_tracy_memory"]
+wayland = ["bevy/wayland"]
 
 # from: https://bevyengine.org/learn/quick-start/getting-started/setup/#compile-with-performance-optimizations
 
