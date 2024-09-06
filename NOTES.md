@@ -43,8 +43,7 @@ git status
 git add .
 git commit -m "project initialization"
 
-dpkg-query -f='${binary:Package;-32} ${Version}\n' -W '*' | grep -E '^(cargo|clang|lld|pkg-config|libx11-dev|libasound2-dev|libudev-dev|libxkbcommon-x11-0|libwayland-dev|libxkbcommon-dev|rustc)[: ]'
-#cargo                            1.79.0+dfsg1-2
+dpkg-query -f='${binary:Package;-32} ${Version}\n' -W '*' | grep -E '^(clang|lld|pkg-config|libx11-dev|libasound2-dev|libudev-dev|libxkbcommon-x11-0|libwayland-dev|libxkbcommon-dev)[: ]'
 #clang                            1:16.0-58.1
 #libasound2-dev:amd64             1.2.12-1
 #libudev-dev:amd64                256.5-1
@@ -54,7 +53,11 @@ dpkg-query -f='${binary:Package;-32} ${Version}\n' -W '*' | grep -E '^(cargo|cla
 #libxkbcommon-x11-0:amd64         1.6.0-1+b1
 #lld:amd64                        1:16.0-58.1
 #pkg-config:amd64                 1.8.1-3
-#rustc                            1.79.0+dfsg1-2
+
+rustup --version                                                                                           |
+#rustup 1.26.0 (2024-08-30)
+#info: This is the version for the rustup toolchain manager, not the rustc compiler.
+#info: The currently active `rustc` version is `rustc 1.81.0 (eeb90cda1 2024-09-04)`
 
 cargo add bevy -F bevy_dev_tools
 editor src/playground.rs
@@ -67,5 +70,4 @@ editor NOTES.md
 git status
 git add .
 git commit -m "split main.rs creating a playground.rs module. add basic FPS overlay"
-
 ```
