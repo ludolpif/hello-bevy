@@ -43,9 +43,11 @@ git status
 git add .
 git commit -m "project initialization"
 
-dpkg-query -f='${binary:Package;-32} ${Version}\n' -W '*' | grep -E '^(clang|lld|pkg-config|libx11-dev|libasound2-dev|libudev-dev|libxkbcommon-x11-0|libwayland-dev|libxkbcommon-dev)[: ]'
+dpkg-query -f='${binary:Package;-32} ${Version}\n' -W '*' \
+| grep -E '^(clang|lld|libc6|pkg-config|lib(x11|asound2|udev|wayland|xkbcommon)-dev|libxkbcommon-x11-0)[: ]'
 #clang                            1:16.0-58.1
 #libasound2-dev:amd64             1.2.12-1
+#libc6:amd64                      2.40-2
 #libudev-dev:amd64                256.5-1
 #libwayland-dev:amd64             1.23.0-1
 #libx11-dev:amd64                 2:1.8.7-1+b1
