@@ -3,7 +3,9 @@ use bevy::prelude::*;
 #[cfg(feature = "dev_mode")]
 mod devmode;
 
-mod playground;
+//mod playground;
+mod sources;
+mod scenes;
 
 fn main() {
     let mut app = App::new();
@@ -14,13 +16,15 @@ fn main() {
     app.add_plugins(DefaultPlugins);
 
     app.add_plugins((
-                crate::playground::HelloPlugin,
+                //crate::playground::HelloPlugin,
+                crate::sources::ColorSourcePlugin,
+                crate::scenes::ScenePersistancePlugin,
         ))
         .add_systems(Startup, setup)
         .run();
 }
 
 fn setup(mut commands: Commands) {
-    // We need to spawn a camera (2d or 3d) to see the fps overlay
+    // Camera
     commands.spawn(Camera2dBundle::default());
 }
