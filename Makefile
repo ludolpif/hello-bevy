@@ -12,6 +12,9 @@ build:
 run:
 	cargo run
 
+strace:
+	scripts/strace.sh
+
 build-release:
 	cargo build --no-default-features --release
 
