@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 
-#[derive(Component, Reflect, Default)]
+// note: Debug was added to make info!("{:?}", csc) work
+// see: https://doc.rust-lang.org/std/fmt/#formatting-traits
+#[derive(Debug,Component, Reflect, Default)]
 #[reflect(Component)]
 pub struct ColorSourceComponent {
     pub native_size: Vec2,

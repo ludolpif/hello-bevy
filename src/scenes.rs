@@ -1,4 +1,4 @@
-use bevy::{prelude::*, tasks::IoTaskPool, utils::Duration};
+use bevy::{prelude::*, tasks::IoTaskPool};
 use std::{fs::File, io::Write};
 
 use crate::sources::ColorSourceComponent;
@@ -38,18 +38,15 @@ impl ScenePersistancePlugin {
         });
     }
 
-    // This system logs all ComponentA components in our world. Try making a change to a ComponentA in
+    // This system logs all ColorSourceComponent components in our world. Try making a change to a ColorSourceComponent in
     // load_scene_example.scn. If you enable the `file_watcher` cargo feature you should immediately see
     // the changes appear in the console whenever you make a change.
     fn log_system(
         query: Query<(Entity, &ColorSourceComponent), Changed<ColorSourceComponent>>
     ) {
-        for (entity, component_a) in &query {
-            info!("  Entity({})", entity.index());
-            info!(
-                "    ComponentA: {{ w: {} h: {} }}\n",
-                component_a.native_size.x, component_a.native_size.y
-            );
+        for (entity, csc) in &query {
+            // note: needs #[derive(Debug,...) on pub struct ColorSourceComponent
+            info!("Entity({}) contains {:?}", entity.index(), csc);
         }
     }
 
