@@ -1,0 +1,39 @@
+(
+  resources: {},
+  entities: {
+    4294967296: (
+      components: {
+        "hello_bevy::sources::ColorSourceComponent": (
+          native_size: (
+            x: 1920.0,
+            y: 1080.0,
+          ),
+          transform: (
+            translation: (
+              x: 0.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            rotation: (
+              x: 0.0,
+              y: 0.0,
+              z: 0.0,
+              w: 1.0,
+            ),
+            scale: (
+              x: 1.0,
+              y: 1.0,
+              z: 1.0,
+            ),
+          ),
+          color: LinearRgba((
+            red: 1.0,
+            green: 0.0,
+            blue: 0.0,
+            alpha: 0.5,
+          )),
+        ),
+      },
+    ),
+  },
+)
