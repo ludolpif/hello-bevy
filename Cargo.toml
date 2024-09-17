@@ -13,7 +13,7 @@ bevy_dev_console = { git = "https://github.com/doonv/bevy_dev_console.git", vers
 # then: https://docs.rs/bevy/latest/bevy/dev_tools/struct.DevToolsPlugin.html
 [features]
 default = ["dev_mode", "wayland"] # not a good practice if we were a reusable crate, seems okay for a game
-dev_mode = ["dep:bevy_dev_console", "bevy/dynamic_linking", "bevy/bevy_dev_tools"]
+dev_mode = ["dep:bevy_dev_console", "bevy/dynamic_linking", "bevy/bevy_dev_tools", "bevy/file_watcher"]
 # , "bevy/bevy_debug_stepping", "bevy/detailed_trace", "bevy/trace_tracy", "bevy/trace_tracy_memory"]
 wayland = ["bevy/wayland"]
 
