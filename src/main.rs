@@ -1,9 +1,11 @@
 use bevy::prelude::*;
+use bevy::winit::{UpdateMode,WinitSettings};
 
 #[cfg(feature = "dev_mode")]
 mod devmode;
 
 //mod playground;
+mod components;
 mod sources;
 mod scenes;
 
@@ -20,6 +22,10 @@ fn main() {
                 crate::sources::ColorSourcePlugin,
                 crate::scenes::ScenePersistancePlugin,
         ))
+        .insert_resource(WinitSettings {
+            focused_mode: UpdateMode::Continuous,
+            unfocused_mode: UpdateMode::Continuous,
+        })
         .add_systems(Startup, setup)
         .run();
 }

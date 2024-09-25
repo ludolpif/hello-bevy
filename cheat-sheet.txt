@@ -1,0 +1,34 @@
+//from: https://github.com/bevyengine/bevy/blob/release-0.14.2/examples/ecs/ecs_guide.rs
+//! Why ECS?
+//! * Data oriented: Functionality is driven by data
+//! * Clean Architecture: Loose coupling of functionality / prevents deeply nested inheritance
+//! * High Performance: Massively parallel and cache friendly
+//!
+//! ECS Definitions:
+//!
+//! Component: just a normal Rust data type. generally scoped to a single piece of functionality
+//!     Examples: position, velocity, health, color, name
+//!
+//! Entity: a collection of components with a unique id
+//!     Examples: Entity1 { Name("Alice"), Position(0, 0) },
+//!               Entity2 { Name("Bill"), Position(10, 5) }
+//!
+//! Resource: a shared global piece of data
+//!     Examples: asset storage, events, system state
+//!
+//! System: runs logic on entities, components, and resources
+//!     Examples: move system, damage system
+
+//from: https://github.com/bevyengine/bevy/blob/release-0.14.2/examples/scene/scene.rs
+    // The `TypeRegistry` resource contains information about all registered types (including components).
+    // This is used to construct scenes, so we'll want to ensure that our previous type registrations
+    // exist in this new scene world as well.
+
+/*
+// Resources can be serialized in scenes as well, with the same requirements `Component`s have.
+#[derive(Resource, Reflect, Default)]
+#[reflect(Resource)]
+struct ResourceA {
+pub score: u32,
+}
+*/

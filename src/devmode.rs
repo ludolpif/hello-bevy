@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 use bevy::log::LogPlugin;
 use bevy::dev_tools::fps_overlay::{FpsOverlayConfig, FpsOverlayPlugin};
+use bevy::window::{PresentMode,WindowMode,WindowResolution};
 use bevy_dev_console::prelude::*;
 
 pub struct DevModePlugin;
@@ -11,6 +12,15 @@ impl Plugin for DevModePlugin {
                 // Add the log plugin with the custom log layer
                 DefaultPlugins.set(LogPlugin {
                     custom_layer: custom_log_layer,
+                    ..default()
+                }).set(WindowPlugin {
+                    primary_window: Some(Window {
+                        present_mode: PresentMode::AutoNoVsync,
+                        mode: WindowMode::BorderlessFullscreen,
+                        resolution: WindowResolution::new(1920.0, 1080.0)
+                            .with_scale_factor_override(1.0),
+                            ..default()
+                    }),
                     ..default()
                 }),
                 // Add the dev console plugin itself.
