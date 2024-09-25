@@ -16,7 +16,7 @@ impl Plugin for ColorSourcePlugin {
     fn build(&self, app: &mut App) {
         app
             .register_type::<ColorSourceComponent>()
-            .add_systems(Startup, ColorSourcePlugin::hello_world);
+            .add_systems(Startup, Self::hello_world);
     }
 }
 
