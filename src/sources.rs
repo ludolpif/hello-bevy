@@ -22,7 +22,7 @@ impl Plugin for ColorSourcePlugin {
 
 impl ColorSourcePlugin {
     fn hello_world() {
-        info!("registered ColorSource plugin");
+        info!("registered ColorSourcePlugin");
     }
 }
 

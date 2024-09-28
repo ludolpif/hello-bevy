@@ -6,8 +6,10 @@ mod devmode;
 
 //mod playground;
 mod components;
-mod sources;
+mod core;
 mod scenes;
+mod sources;
+mod systemsets;
 
 fn main() {
     let mut app = App::new();
@@ -19,6 +21,7 @@ fn main() {
 
     app.add_plugins((
                 //crate::playground::HelloPlugin,
+                crate::core::CoreLogicPlugin,
                 crate::sources::ColorSourcePlugin,
                 crate::scenes::ScenePersistancePlugin,
         ))
