@@ -6,13 +6,21 @@ edition = "2021"
 # from: https://doc.rust-lang.org/cargo/reference/features.html
 # and: https://docs.rs/bevy/latest/bevy/index.html#cargo-features
 [dependencies]
-bevy = { version = "0.14.1", features = ["bevy_dynamic_plugin", "jpeg", "symphonia-all", "sysinfo_plugin", "webp"] }
-bevy-inspector-egui = { version = "0.26.0", features = ["bevy_render", "egui_clipboard", "egui_open_url", "highlight_changes"], default-features = false, optional = true}
+anyhow = "1.0.89"
+bevy = { version = "*", features = ["bevy_dynamic_plugin", "jpeg", "symphonia-all", "sysinfo_plugin", "webp"] }
+bevy-inspector-egui = { version = "*", features = ["bevy_render", "highlight_changes"], default-features = false, optional = true}
+crossbeam-channel = "*"
+derive_more = { version = "1.0.0", features = ["display", "error"] }
+glib = "0.20.4"
+gst = { package = "gstreamer", version = "0.23.2", features = ["v1_24"] }
+gst-app = { package = "gstreamer-app", version = "0.23.2", features = ["v1_24"] }
+gst-base = { package = "gstreamer-base", version = "0.23.2", features = ["v1_24"] }
+gst-video = { package = "gstreamer-video", version = "0.23.2", features = ["v1_24"] }
 
 # from: https://bevyengine.org/learn/quick-start/getting-started/setup/#dynamic-linking
 # then: https://docs.rs/bevy/latest/bevy/dev_tools/struct.DevToolsPlugin.html
 [features]
-default = ["dev_mode", "wayland"] # not a good practice if we were a reusable crate, seems okay for a game
+default = ["dev_mode", "wayland"] # not a good practice if we were a reusable crate, seems okay for a program
 dev_mode = ["dep:bevy-inspector-egui", "bevy/dynamic_linking", "bevy/bevy_dev_tools", "bevy/file_watcher"]
 # , "bevy/bevy_debug_stepping", "bevy/detailed_trace", "bevy/trace_tracy", "bevy/trace_tracy_memory"]
 wayland = ["bevy/wayland"]
