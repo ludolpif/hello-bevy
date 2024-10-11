@@ -1,8 +1,8 @@
+// https://bevy-cheatbook.github.io/platforms/windows.html#disabling-the-windows-console
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
 use bevy::prelude::*;
 use bevy::winit::{UpdateMode,WinitSettings};
-
-// https://bevy-cheatbook.github.io/platforms/windows.html#disabling-the-windows-console
-#![cfg(not(feature = "dev_mode")), windows_subsystem = "windows")]
 
 #[cfg(feature = "dev_mode")]
 mod devmode;
