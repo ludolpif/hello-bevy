@@ -11,12 +11,10 @@ bevy = { version = "*", features = ["bevy_dynamic_plugin", "jpeg", "symphonia-al
 bevy-inspector-egui = { version = "*", features = ["bevy_render", "highlight_changes"], default-features = false, optional = true}
 crossbeam-channel = "*"
 derive_more = { version = "1.0.0", features = ["display", "error"] }
-glib = "0.20.4"
-gst = { package = "gstreamer", version = "0.23.2", features = ["v1_24"] }
-gst-app = { package = "gstreamer-app", version = "0.23.2", features = ["v1_24"] }
-gst-base = { package = "gstreamer-base", version = "0.23.2", features = ["v1_24"] }
-gst-video = { package = "gstreamer-video", version = "0.23.2", features = ["v1_24"] }
-
+gst-plugin-closedcaption = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.2", version = "0.13.2", features = ["static"] }
+gst-plugin-fallbackswitch = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.2", version = "0.13.2", features = ["static"] }
+gst-plugin-livesync = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.2", version = "0.13.2", features = ["static"] }
+gst = { package="gstreamer", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs.git", rev="c9f7a2a9" }
 # from: https://bevyengine.org/learn/quick-start/getting-started/setup/#dynamic-linking
 # then: https://docs.rs/bevy/latest/bevy/dev_tools/struct.DevToolsPlugin.html
 [features]
