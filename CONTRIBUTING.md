@@ -1,6 +1,6 @@
 # Notes
 
-## Develpement environnement configuration
+## Development environnement configuration
 
 On a debian trixie:
 - make sure that `sudo ./build-dep-system.sh` and `./build-dep-user.sh` have been ran
