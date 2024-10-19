@@ -3,6 +3,8 @@
 // as launch syntax.
 // When the parsing succeeded, the pipeline is run until the stream ends or an error happens.
 
+// $ GST_DEBUG=3 cargo run --example gst-launch audiotestsrc ! autoaudiosink videotestsrc ! autovideosink
+
 use std::{env, process};
 
 use gst::prelude::*;
