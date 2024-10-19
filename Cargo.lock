@@ -1343,6 +1343,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "79296716171880943b8470b5f8d03aa55eb2e645a4874bdbb28adb49162e012c"
 
 [[package]]
+name = "byte-slice-cast"
+version = "1.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c3ac9f8b63eca6fd385229b3675f6cc0dc5c8a5c8a54a59d4f52ffd670d87b0c"
+
+[[package]]
 name = "bytemuck"
 version = "1.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1750,10 +1756,39 @@ dependencies = [
 ]
 
 [[package]]
+name = "crossbeam-deque"
+version = "0.8.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "613f8cc01fe9cf1a3eb3d7f488fd2fa8388403e97039e2f73692932e291a770d"
+dependencies = [
+ "crossbeam-epoch",
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "crossbeam-epoch"
+version = "0.9.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5b82ac4a3c2ca9c3460964f020e1402edd5753411d7737aa39c3714ad1b5420e"
+dependencies = [
+ "crossbeam-utils",
+]
+
+[[package]]
 name = "crossbeam-utils"
 version = "0.8.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "22ec99545bb0ed0ea7bb9b8e1e9122ea386ff8a48c0922e43f36d45ab09e0e80"
+
+[[package]]
+name = "ctrlc"
+version = "3.4.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "90eeab0aa92f3f9b4e87f258c72b139c207d251f9cbc1080a0086b86a8870dd3"
+dependencies = [
+ "nix",
+ "windows-sys 0.59.0",
+]
 
 [[package]]
 name = "cursor-icon"
@@ -1770,6 +1805,15 @@ dependencies = [
  "bitflags 2.6.0",
  "libloading 0.8.5",
  "winapi",
+]
+
+[[package]]
+name = "dasp_frame"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b2a3937f5fe2135702897535c8d4a5553f8b116f76c1529088797f2eee7c5cd6"
+dependencies = [
+ "dasp_sample",
 ]
 
 [[package]]
@@ -1840,6 +1884,18 @@ name = "dpi"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f25c0e292a7ca6d6498557ff1df68f32c99850012b6ea401cf8daf771f22ff53"
+
+[[package]]
+name = "ebur128"
+version = "0.1.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c2d4466b277f37735da60bee5ba0ecd88e6e40a22d36e68b58d808f84f4ed989"
+dependencies = [
+ "bitflags 1.3.2",
+ "dasp_frame",
+ "dasp_sample",
+ "smallvec",
+]
 
 [[package]]
 name = "ecolor"
@@ -2157,6 +2213,12 @@ dependencies = [
  "quote",
  "syn 2.0.79",
 ]
+
+[[package]]
+name = "futures-sink"
+version = "0.3.31"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e575fab7d1e0dcb8d0c7bcf9a63ee213816ab51902e6d244a95819acacf1d4f7"
 
 [[package]]
 name = "futures-task"
@@ -2478,6 +2540,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "be136d9dacc2a13cc70bb6c8f902b414fb2641f8db1314637c6b7933411a8f82"
 
 [[package]]
+name = "gst-plugin-audiofx"
+version = "0.13.2"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git?tag=0.13.2#f0f33692ac620a5f75da5c2a0b54e33388ba4cf5"
+dependencies = [
+ "anyhow",
+ "atomic_refcell",
+ "byte-slice-cast",
+ "ebur128",
+ "gst-plugin-version-helper",
+ "gstreamer",
+ "gstreamer-audio",
+ "gstreamer-base",
+ "hrtf",
+ "nnnoiseless",
+ "num-traits",
+ "once_cell",
+ "rayon",
+ "smallvec",
+]
+
+[[package]]
 name = "gst-plugin-closedcaption"
 version = "0.13.2"
 source = "git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git?tag=0.13.2#f0f33692ac620a5f75da5c2a0b54e33388ba4cf5"
@@ -2491,7 +2574,7 @@ dependencies = [
  "chrono",
  "either",
  "gst-plugin-version-helper",
- "gstreamer 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer",
  "gstreamer-base",
  "gstreamer-video",
  "once_cell",
@@ -2510,7 +2593,7 @@ version = "0.13.2"
 source = "git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git?tag=0.13.2#f0f33692ac620a5f75da5c2a0b54e33388ba4cf5"
 dependencies = [
  "gst-plugin-version-helper",
- "gstreamer 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer",
  "gstreamer-audio",
  "gstreamer-base",
  "gstreamer-video",
@@ -2524,9 +2607,35 @@ version = "0.13.2"
 source = "git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git?tag=0.13.2#f0f33692ac620a5f75da5c2a0b54e33388ba4cf5"
 dependencies = [
  "gst-plugin-version-helper",
- "gstreamer 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer",
  "gstreamer-audio",
  "num-rational",
+ "once_cell",
+ "parking_lot",
+]
+
+[[package]]
+name = "gst-plugin-png"
+version = "0.13.2"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git?tag=0.13.2#f0f33692ac620a5f75da5c2a0b54e33388ba4cf5"
+dependencies = [
+ "gst-plugin-version-helper",
+ "gstreamer",
+ "gstreamer-video",
+ "once_cell",
+ "parking_lot",
+ "png",
+]
+
+[[package]]
+name = "gst-plugin-togglerecord"
+version = "0.13.2"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git?tag=0.13.2#f0f33692ac620a5f75da5c2a0b54e33388ba4cf5"
+dependencies = [
+ "gst-plugin-version-helper",
+ "gstreamer",
+ "gstreamer-audio",
+ "gstreamer-video",
  "once_cell",
  "parking_lot",
 ]
@@ -2543,14 +2652,14 @@ dependencies = [
 [[package]]
 name = "gstreamer"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
  "cfg-if",
  "futures-channel",
  "futures-core",
  "futures-util",
  "glib",
- "gstreamer-sys 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer-sys",
  "itertools",
  "libc",
  "muldiv",
@@ -2565,37 +2674,39 @@ dependencies = [
 ]
 
 [[package]]
-name = "gstreamer"
+name = "gstreamer-app"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs.git?rev=c9f7a2a9#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
- "cfg-if",
- "futures-channel",
  "futures-core",
- "futures-util",
+ "futures-sink",
  "glib",
- "gstreamer-sys 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs.git?rev=c9f7a2a9)",
- "itertools",
+ "gstreamer",
+ "gstreamer-app-sys",
+ "gstreamer-base",
  "libc",
- "muldiv",
- "num-integer",
- "num-rational",
- "once_cell",
- "option-operations",
- "paste",
- "pin-project-lite",
- "smallvec",
- "thiserror",
+]
+
+[[package]]
+name = "gstreamer-app-sys"
+version = "0.23.2"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
+dependencies = [
+ "glib-sys",
+ "gstreamer-base-sys",
+ "gstreamer-sys",
+ "libc",
+ "system-deps",
 ]
 
 [[package]]
 name = "gstreamer-audio"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
  "cfg-if",
  "glib",
- "gstreamer 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer",
  "gstreamer-audio-sys",
  "gstreamer-base",
  "libc",
@@ -2606,12 +2717,12 @@ dependencies = [
 [[package]]
 name = "gstreamer-audio-sys"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
  "glib-sys",
  "gobject-sys",
  "gstreamer-base-sys",
- "gstreamer-sys 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer-sys",
  "libc",
  "system-deps",
 ]
@@ -2619,12 +2730,12 @@ dependencies = [
 [[package]]
 name = "gstreamer-base"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
  "atomic_refcell",
  "cfg-if",
  "glib",
- "gstreamer 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer",
  "gstreamer-base-sys",
  "libc",
 ]
@@ -2632,11 +2743,11 @@ dependencies = [
 [[package]]
 name = "gstreamer-base-sys"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
  "glib-sys",
  "gobject-sys",
- "gstreamer-sys 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer-sys",
  "libc",
  "system-deps",
 ]
@@ -2644,7 +2755,7 @@ dependencies = [
 [[package]]
 name = "gstreamer-sys"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
  "glib-sys",
  "gobject-sys",
@@ -2653,25 +2764,26 @@ dependencies = [
 ]
 
 [[package]]
-name = "gstreamer-sys"
+name = "gstreamer-utils"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs.git?rev=c9f7a2a9#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
- "glib-sys",
- "gobject-sys",
- "libc",
- "system-deps",
+ "gstreamer",
+ "gstreamer-app",
+ "gstreamer-video",
+ "once_cell",
+ "thiserror",
 ]
 
 [[package]]
 name = "gstreamer-video"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
  "cfg-if",
  "futures-channel",
  "glib",
- "gstreamer 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer",
  "gstreamer-base",
  "gstreamer-video-sys",
  "libc",
@@ -2682,12 +2794,12 @@ dependencies = [
 [[package]]
 name = "gstreamer-video-sys"
 version = "0.23.2"
-source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#c9f7a2a947b8c2dfbae8ac9f090070ee5a0c4438"
+source = "git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23#a360f11ac7a4810eb0d899e9f97ffddcc75435ae"
 dependencies = [
  "glib-sys",
  "gobject-sys",
  "gstreamer-base-sys",
- "gstreamer-sys 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs?branch=0.23)",
+ "gstreamer-sys",
  "libc",
  "system-deps",
 ]
@@ -2748,11 +2860,21 @@ dependencies = [
  "bevy",
  "bevy-inspector-egui",
  "crossbeam-channel",
+ "ctrlc",
  "derive_more",
+ "gst-plugin-audiofx",
  "gst-plugin-closedcaption",
  "gst-plugin-fallbackswitch",
  "gst-plugin-livesync",
- "gstreamer 0.23.2 (git+https://gitlab.freedesktop.org/gstreamer/gstreamer-rs.git?rev=c9f7a2a9)",
+ "gst-plugin-png",
+ "gst-plugin-togglerecord",
+ "gstreamer",
+ "gstreamer-app",
+ "gstreamer-audio",
+ "gstreamer-base",
+ "gstreamer-utils",
+ "gstreamer-video",
+ "xdg",
 ]
 
 [[package]]
@@ -2776,6 +2898,17 @@ name = "hexf-parse"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dfa686283ad6dd069f105e5ab091b04c62850d3e4cf5d67debad1933f55023df"
+
+[[package]]
+name = "hrtf"
+version = "0.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0f4de47a84fd55fa33aa5ef337016814fdc869fdad23e7898b5322fa290248e6"
+dependencies = [
+ "byteorder",
+ "rubato",
+ "rustfft",
+]
 
 [[package]]
 name = "iana-time-zone"
@@ -3306,6 +3439,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "nnnoiseless"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "23d377ce2fb579ed5c14cfa0d39e70849030fdf673d6d1a764cadb2dfbb02a50"
+dependencies = [
+ "once_cell",
+ "rustfft",
+]
+
+[[package]]
 name = "nohash-hasher"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3377,6 +3520,15 @@ checksum = "77a8165726e8236064dbb45459242600304b42a5ea24ee2948e18e023bf7ba84"
 dependencies = [
  "overload",
  "winapi",
+]
+
+[[package]]
+name = "num-complex"
+version = "0.4.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495"
+dependencies = [
+ "num-traits",
 ]
 
 [[package]]
@@ -3920,6 +4072,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f0f73cdaf19b52e6143685c3606206e114a4dfa969d6b14ec3894c88eb38bd4b"
 
 [[package]]
+name = "primal-check"
+version = "0.3.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dc0d895b311e3af9902528fbb8f928688abbd95872819320517cc24ca6b2bd08"
+dependencies = [
+ "num-integer",
+]
+
+[[package]]
 name = "proc-macro-crate"
 version = "3.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3999,6 +4160,35 @@ name = "raw-window-handle"
 version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20675572f6f24e9e76ef639bc5552774ed45f1c30e2951e1e99c59888861c539"
+
+[[package]]
+name = "rayon"
+version = "1.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b418a60154510ca1a002a752ca9714984e21e4241e804d32555251faf8b78ffa"
+dependencies = [
+ "either",
+ "rayon-core",
+]
+
+[[package]]
+name = "rayon-core"
+version = "1.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1465873a3dfdaa8ae7cb14b4383657caab0b3e8a0aa9ae8e04b044854c8dfce2"
+dependencies = [
+ "crossbeam-deque",
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "realfft"
+version = "3.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "390252372b7f2aac8360fc5e72eba10136b166d6faeed97e6d0c8324eb99b2b1"
+dependencies = [
+ "rustfft",
+]
 
 [[package]]
 name = "rectangle-pack"
@@ -4099,10 +4289,37 @@ dependencies = [
 ]
 
 [[package]]
+name = "rubato"
+version = "0.14.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e6dd52e80cfc21894deadf554a5673002938ae4625f7a283e536f9cf7c17b0d5"
+dependencies = [
+ "num-complex",
+ "num-integer",
+ "num-traits",
+ "realfft",
+]
+
+[[package]]
 name = "rustc-hash"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
+
+[[package]]
+name = "rustfft"
+version = "6.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "43806561bc506d0c5d160643ad742e3161049ac01027b5e6d7524091fd401d86"
+dependencies = [
+ "num-complex",
+ "num-integer",
+ "num-traits",
+ "primal-check",
+ "strength_reduce",
+ "transpose",
+ "version_check",
+]
 
 [[package]]
 name = "rustix"
@@ -4306,6 +4523,12 @@ name = "static_assertions"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
+
+[[package]]
+name = "strength_reduce"
+version = "0.2.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fe895eb47f22e2ddd4dabc02bce419d2e643c8e3b585c78158b349195bc24d82"
 
 [[package]]
 name = "strict-num"
@@ -4715,6 +4938,16 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "transpose"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1ad61aed86bc3faea4300c7aee358b4c6d0c8d6ccc36524c96e4c92ccf26e77e"
+dependencies = [
+ "num-integer",
+ "strength_reduce",
 ]
 
 [[package]]
@@ -5603,6 +5836,12 @@ name = "xcursor"
 version = "0.3.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0ef33da6b1660b4ddbfb3aef0ade110c8b8a781a3b6382fa5f2b5b040fd55f61"
+
+[[package]]
+name = "xdg"
+version = "2.5.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "213b7324336b53d2414b2db8537e56544d981803139155afa84f76eeebb7a546"
 
 [[package]]
 name = "xi-unicode"
