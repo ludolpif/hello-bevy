@@ -47,26 +47,32 @@ fn main() -> Result<(), anyhow::Error> {
     pipeline.debug_to_dot_file_with_ts(gst::DebugGraphDetails::all(), "pipeline-playing");
     println!("dumped PLAYING");
 
-    // GStreamer pipeline event loop
-    for msg in bus.iter_timed(gst::ClockTime::SECOND) {
-        match msg.view() {
-            gst::MessageView::Eos(eos) => {
-                println!("End Of Stream received {eos:?}");
-                break;
+    let mut one_second_dumped = false;
+    while running.load(Ordering::SeqCst) {
+        // GStreamer pipeline event loop
+        for msg in bus.iter_timed(gst::ClockTime::SECOND) {
+            match msg.view() {
+                gst::MessageView::Eos(eos) => {
+                    println!("End Of Stream received {eos:?}");
+                    break;
+                }
+                gst::MessageView::Error(err) => {
+                    println!(
+                        "Error from {:?}: {} ({:?})",
+                        err.src().map(|s| s.path_string()),
+                        err.error(),
+                        err.debug()
+                    );
+                    break;
+                }
+                _ => {
+                    println!("{msg:?}");
+                },
             }
-            gst::MessageView::Error(err) => {
-                println!(
-                    "Error from {:?}: {} ({:?})",
-                    err.src().map(|s| s.path_string()),
-                    err.error(),
-                    err.debug()
-                );
-                break;
-            }
-            _ => (),
-        };
-        if !running.load(Ordering::SeqCst) {
-            break;
+        }
+        if !one_second_dumped {
+            pipeline.debug_to_dot_file_with_ts(gst::DebugGraphDetails::all(), "pipeline-after-one-sec");
+            one_second_dumped = true;
         }
     }
 
@@ -94,7 +100,7 @@ fn create_pipeline(name: &str) -> Result<gst::Pipeline, anyhow::Error> {
     gst::Element::link_many([&filesrc, &decodebin])?;
 
     // Register a pad-added signal handler to connect pads when they will be available
-    // (when pipeline will swtich to state Playing)
+    // (when pipeline will switch to state Playing)
     decodebin.connect_pad_added(move |src, src_pad| {
         println!("Received new pad {} from {}", src_pad.name(), src.name());
         src.downcast_ref::<gst::Bin>()
