@@ -11,18 +11,6 @@ bevy = { version = "0.16.1", features = ["jpeg", "symphonia-all", "sysinfo_plugi
 bevy-inspector-egui = { version = "0.31", features = ["bevy_render", "highlight_changes"], default-features = false, optional = true}
 crossbeam-channel = "*"
 derive_more = { version = "*", features = ["display", "error"] }
-gst = { package = "gstreamer", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", branch = "0.23", version = "0.23" }
-gst-app = { package = "gstreamer-app", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", branch = "0.23", version = "0.23" }
-gst-audio = { package = "gstreamer-audio", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", branch = "0.23", version = "0.23" }
-gst-base = { package = "gstreamer-base", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", branch = "0.23", version = "0.23" }
-gst-utils = { package = "gstreamer-utils", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", branch = "0.23", version = "0.23" }
-gst-video = { package = "gstreamer-video", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", branch = "0.23", version = "0.23" }
-gst-plugin-audiofx = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.6", version = "0.13.6" }
-gst-plugin-closedcaption = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.6", version = "0.13.6" }
-gst-plugin-fallbackswitch = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.6", version = "0.13.6" }
-gst-plugin-livesync = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.6", version = "0.13.6" }
-gst-plugin-png = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.6", version = "0.13.6" }
-gst-plugin-togglerecord = { git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git", tag = "0.13.6", version = "0.13.6" }
 xdg = "*"
 ctrlc = "*"
 # from: https://bevyengine.org/learn/quick-start/getting-started/setup/#dynamic-linking
