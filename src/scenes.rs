@@ -27,14 +27,14 @@ impl ScenePersistancePlugin {
     fn hello_world() {
         info!("registered ScenePersistancePlugin");
     }
+    /// Loads a scene from an asset file and spawns it in the current world.
+    ///
+    /// Spawning a `DynamicSceneRoot` creates a new parent entity, which then spawns new
+    /// instances of the scene's entities as its children. If you modify the
+    /// `SCENE_FILE_PATH` scene file, or if you enable file watching, you can see
+    /// changes reflected immediately.
     fn load_scene_system(mut commands: Commands, asset_server: Res<AssetServer>) {
-        // "Spawning" a scene bundle creates a new entity and spawns new instances
-        // of the given scene's entities as children of that entity.
-        commands.spawn(DynamicSceneBundle {
-            // Scenes are loaded just like any other asset.
-            scene: asset_server.load(SCENE_FILE_PATH),
-            ..default()
-        });
+        commands.spawn(DynamicSceneRoot(asset_server.load(SCENE_FILE_PATH)));
     }
 
     // This system logs all ColorSourceComponent components in our world. Try making a change to a ColorSourceComponent in

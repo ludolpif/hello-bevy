@@ -1,5 +1,5 @@
 use bevy::prelude::{Bundle,Component,Vec2};
-use std::path::Path;
+//use std::path::Path;
 
 /* Profile */
 
@@ -78,7 +78,7 @@ pub enum StreamService {
 }
 
 #[derive(Component)]
-pub struct StreamServer(str);
+pub struct StreamServer(String);
 
 //FIXME how to have some secrets management ?
 #[derive(Component)]
@@ -93,7 +93,7 @@ pub enum StreamMode {
 /* LocalRecord destination */
 
 #[derive(Component)]
-pub struct RecordFolder(Path);
+pub struct RecordFolder(String);
 
 #[derive(Component)]
 pub enum RecordContainer {
@@ -101,5 +101,5 @@ pub enum RecordContainer {
 }
 
 #[derive(Component)]
-pub struct FileNameFmt(str);
+pub struct FileNameFmt(String);
 
