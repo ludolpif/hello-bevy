@@ -37,6 +37,5 @@ fn main() {
 }
 
 fn setup(mut commands: Commands) {
-    // Camera
     commands.spawn(Camera2d);
 }

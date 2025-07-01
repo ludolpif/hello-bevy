@@ -8,7 +8,7 @@ impl Plugin for ScenePersistancePlugin {
     fn build(&self, app: &mut App) {
         app
             .add_systems(Startup, (
-                    Self::hello_world,
+                    Self::setup,
                     Self::load_scene_system,
             ))
             .add_systems(Update, Self::log_system)
@@ -24,7 +24,7 @@ impl ScenePersistancePlugin {
     // https://github.com/bevyengine/bevy/discussions/9538
     // For now code is borrowed from https://github.com/bevyengine/bevy/blob/main/examples/scene/scene.rs
 
-    fn hello_world() {
+    fn setup() {
         info!("registered ScenePersistancePlugin");
     }
     /// Loads a scene from an asset file and spawns it in the current world.

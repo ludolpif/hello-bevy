@@ -3,7 +3,6 @@ use std::time::Duration;
 use bevy::input::common_conditions::input_toggle_active;
 use bevy::prelude::*;
 use bevy::dev_tools::fps_overlay::{FpsOverlayConfig, FpsOverlayPlugin};
-use bevy::text::{FontSmoothing, LineHeight};
 use bevy::window::{PresentMode,WindowMode,WindowResolution};
 use bevy_inspector_egui::bevy_egui::EguiPlugin;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
@@ -32,28 +31,25 @@ impl Plugin for DevModePlugin {
                     FpsOverlayPlugin { config:
                         FpsOverlayConfig {
                             text_config: TextFont {
-                                font: default(),
                                 font_size: 16.0,
-                                line_height: LineHeight::default(),
-                                font_smoothing: FontSmoothing::AntiAliased
+                                ..default()
                             },
-                            text_color: Color::srgb(0.0, 1.0, 0.0),
-                            enabled: true,
-                            refresh_interval: Duration::from_millis(100)
+                            text_color: Color::srgba(1.0, 1.0, 0.0, 0.7),
+                            refresh_interval: Duration::from_secs_f64(1.0/30.0),
+                            ..default()
                         }
                     },
             ))
-            .add_systems(Startup, (
-                    Self::hello_world,
-            ))
+            .add_systems(Startup, Self::setup)
             .add_systems(Update, (
+                    //FIXME seem evaluated too much
                     Self::add_name_to_fpsoverlay_for_worldinspector,
             ));
     }
 }
 
 impl DevModePlugin {
-    fn hello_world() {
+    fn setup() {
         info!("registered DevModePlugin");
     }
     fn add_name_to_fpsoverlay_for_worldinspector(query: Query<Entity, (Without<Name>, With<Children>, With<ZIndex>)>, mut commands: Commands) {
