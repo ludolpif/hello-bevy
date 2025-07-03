@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'hello-bevy'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=hello-bevy",
+                    "--package=hello-bevy"
+                ],
+                "filter": {
+                    "name": "hello-bevy",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "LD_LIBRARY_PATH": "/home/ludolpif/git/bevy/hello-bevy/target/debug/deps:/home/ludolpif/git/bevy/hello-bevy/target/debug:/home/ludolpif/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib:/home/ludolpif/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib"
+            },
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'hello-bevy'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=hello-bevy",
+                    "--package=hello-bevy"
+                ],
+                "filter": {
+                    "name": "hello-bevy",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "LD_LIBRARY_PATH": "/home/ludolpif/git/bevy/hello-bevy/target/debug/deps:/home/ludolpif/git/bevy/hello-bevy/target/debug:/home/ludolpif/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib:/home/ludolpif/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib"
+            },
+        }
+    ]
+}
