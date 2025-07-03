@@ -25,9 +25,22 @@ impl Plugin for ColorSourcePlugin {
 }
 
 impl ColorSourcePlugin {
-    fn setup() {
+    fn setup(
+        mut commands: Commands,
+        mut meshes: ResMut<Assets<Mesh>>,
+        mut materials: ResMut<Assets<ColorMaterial>>,
+    ) {
         info!("registered ColorSourcePlugin");
+        let shape = meshes.add(Rectangle::new(50.0, 50.0));
+        let color = Color::hsl(0.0, 0.95, 0.7);
+        let material = materials.add(color);
+        commands.spawn((
+            Mesh2d(shape),
+            MeshMaterial2d(material),
+            Transform::IDENTITY
+        ));
     }
+    
 }
 
 

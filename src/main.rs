@@ -2,7 +2,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use bevy::prelude::*;
-use bevy::winit::{UpdateMode,WinitSettings};
+use bevy::window::{PresentMode, WindowMode, WindowResolution};
+use bevy::winit::{UpdateMode, WinitSettings};
 
 #[cfg(feature = "dev_mode")]
 mod devmode;
@@ -10,30 +11,47 @@ mod devmode;
 //mod playground;
 mod components;
 mod core;
+mod diagnostics;
 mod scenes;
 mod sources;
 mod systemsets;
 
+const WINDOW_TITLE: &str = "Hello Bevy";
+
 fn main() {
     let mut app = App::new();
 
+    app.add_plugins((
+        DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                mode: WindowMode::BorderlessFullscreen(MonitorSelection::Current),
+                present_mode: PresentMode::AutoNoVsync,
+                title: WINDOW_TITLE.into(),
+                resolution: WindowResolution::new(1920.0, 1080.0).with_scale_factor_override(1.0),
+                ..default()
+            }),
+            ..default()
+        }),
+        // Limit CPU usage without blocking on VSync
+        bevy_framepace::FramepacePlugin,
+    ));
+
     #[cfg(feature = "dev_mode")]
     app.add_plugins(crate::devmode::DevModePlugin);
-    #[cfg(not(feature = "dev_mode"))]
-    app.add_plugins(DefaultPlugins);
 
     app.add_plugins((
-                //crate::playground::HelloPlugin,
-                crate::core::CoreLogicPlugin,
-                crate::sources::ColorSourcePlugin,
-                crate::scenes::ScenePersistancePlugin,
-        ))
-        .insert_resource(WinitSettings {
-            focused_mode: UpdateMode::Continuous,
-            unfocused_mode: UpdateMode::Continuous,
-        })
-        .add_systems(Startup, setup)
-        .run();
+        //crate::playground::HelloPlugin,
+        crate::core::CoreLogicPlugin,
+        crate::diagnostics::DiagnosticsPlugin,
+        crate::sources::ColorSourcePlugin,
+        crate::scenes::ScenePersistancePlugin,
+    ))
+    .insert_resource(WinitSettings {
+        focused_mode: UpdateMode::Continuous,
+        unfocused_mode: UpdateMode::Continuous,
+    })
+    .add_systems(Startup, setup)
+    .run();
 }
 
 fn setup(mut commands: Commands) {

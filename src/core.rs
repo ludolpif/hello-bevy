@@ -1,6 +1,9 @@
 use bevy::prelude::*;
 use crate::systemsets::*;
 
+// From https://bevy.org/examples/games/game-menu/
+// TODO make more usage of it
+
 #[derive(States, Default, Debug, Clone, PartialEq, Eq, Hash)]
 pub enum MyAppState {
     #[default]
