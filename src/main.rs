@@ -15,8 +15,18 @@ mod diagnostics;
 mod scenes;
 mod sources;
 mod systemsets;
+mod userinput;
 
 const WINDOW_TITLE: &str = "Hello Bevy";
+
+#[derive(Resource)]
+struct AppSettings {
+    keyboard: KeyboardSettings,
+}
+
+struct KeyboardSettings {
+    diag: KeyCode,
+}
 
 fn main() {
     let mut app = App::new();
@@ -45,10 +55,14 @@ fn main() {
         crate::diagnostics::DiagnosticsPlugin,
         crate::sources::ColorSourcePlugin,
         crate::scenes::ScenePersistancePlugin,
+        crate::userinput::UserInputPlugin,
     ))
     .insert_resource(WinitSettings {
         focused_mode: UpdateMode::Continuous,
         unfocused_mode: UpdateMode::Continuous,
+    })
+    .insert_resource(AppSettings {
+        keyboard: KeyboardSettings { diag: KeyCode::F8 }
     })
     .add_systems(Startup, setup)
     .run();
