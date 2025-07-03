@@ -11,8 +11,7 @@ impl Plugin for ScenePersistancePlugin {
                     Self::setup,
                     Self::load_scene_system,
             ))
-            .add_systems(Update, Self::log_system)
-            ;
+            .add_systems(Update, Self::log_system);
     }
 }
 
@@ -34,7 +33,10 @@ impl ScenePersistancePlugin {
     /// `SCENE_FILE_PATH` scene file, or if you enable file watching, you can see
     /// changes reflected immediately.
     fn load_scene_system(mut commands: Commands, asset_server: Res<AssetServer>) {
-        commands.spawn(DynamicSceneRoot(asset_server.load(SCENE_FILE_PATH)));
+        commands.spawn((
+            DynamicSceneRoot(asset_server.load(SCENE_FILE_PATH)),
+            Name::new(SCENE_FILE_PATH)
+        ));
     }
 
     // This system logs all ColorSourceComponent components in our world. Try making a change to a ColorSourceComponent in
