@@ -13,18 +13,13 @@ struct General;
 impl Plugin for UserInputPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins(EnhancedInputPlugin)
-        .add_input_context::<General>()
-        .add_systems(Startup, Self::setup)
-        .add_observer(Self::bind_actions);
+            .add_input_context::<General>()
+            .add_systems(Startup, Self::setup)
+            .add_observer(Self::bind_actions);
     }
 }
 
-#[derive(Debug, InputAction)]
-#[input_action(output = bool)]
-pub struct Diag;
-
 impl UserInputPlugin {
-
     fn setup(mut commands: Commands) {
         info!("registered DiagnosticsPlugin");
         commands.spawn(Actions::<General>::default());
@@ -34,11 +29,30 @@ impl UserInputPlugin {
     fn bind_actions(
         trigger: Trigger<Bind<General>>,
         settings: Res<AppSettings>,
-        mut actions: Query<&mut Actions<General>>
+        mut actions: Query<&mut Actions<General>>,
     ) {
         let mut actions = actions.get_mut(trigger.target()).unwrap();
-        actions
-            .bind::<Diag>()
-            .to(settings.keyboard.diag);
+        actions.bind::<Diag>().to(settings.keyboard.diag);
+        actions.bind::<DumpScene>().to(settings.keyboard.dump_scene);
     }
 }
+pub struct KeyboardSettings {
+    diag: KeyCode,
+    dump_scene: KeyCode,
+}
+impl KeyboardSettings {
+    pub fn default() -> KeyboardSettings {
+        KeyboardSettings {
+            diag: KeyCode::F8,
+            dump_scene: KeyCode::F9,
+        }
+    }
+}
+
+#[derive(Debug, InputAction)]
+#[input_action(output = bool)]
+pub struct Diag;
+
+#[derive(Debug, InputAction)]
+#[input_action(output = bool)]
+pub struct DumpScene;

@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy_enhanced_input::prelude::Started;
 
 use crate::sources::ColorSourceComponent;
 
@@ -6,12 +7,9 @@ pub struct ScenePersistancePlugin;
 
 impl Plugin for ScenePersistancePlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_systems(Startup, (
-                    Self::setup,
-                    Self::load_scene_system,
-            ))
-            .add_systems(Update, Self::log_system);
+        app.add_systems(Startup, (Self::setup, Self::load_scene_system))
+            .add_systems(Update, Self::log_system)
+            .add_observer(Self::dump_scene);
     }
 }
 
@@ -35,19 +33,33 @@ impl ScenePersistancePlugin {
     fn load_scene_system(mut commands: Commands, asset_server: Res<AssetServer>) {
         commands.spawn((
             DynamicSceneRoot(asset_server.load(SCENE_FILE_PATH)),
-            Name::new(SCENE_FILE_PATH)
+            Name::new(SCENE_FILE_PATH),
         ));
     }
 
     // This system logs all ColorSourceComponent components in our world. Try making a change to a ColorSourceComponent in
     // load_scene_example.scn. If you enable the `file_watcher` cargo feature you should immediately see
     // the changes appear in the console whenever you make a change.
-    fn log_system(
-        query: Query<(Entity, &ColorSourceComponent), Changed<ColorSourceComponent>>
-    ) {
+    fn log_system(query: Query<(Entity, &ColorSourceComponent), Changed<ColorSourceComponent>>) {
         for (entity, csc) in &query {
             // note: needs #[derive(Debug,...) on pub struct ColorSourceComponent
             info!("Entity({}) contains {:?}", entity.index(), csc);
         }
+    }
+
+    fn dump_scene(_trigger: Trigger<Started<crate::user_input::DumpScene>>, world: &mut World) {
+        // https://docs.rs/bevy/latest/bevy/scene/struct.DynamicSceneBuilder.html#method.extract_entities
+        let mut query = world.query_filtered::<Entity, With<ColorSourceComponent>>();
+
+        let scene = DynamicSceneBuilder::from_world(&world)
+            .extract_entities(query.iter(&world))
+            .build();
+        // Scenes can be serialized like this:
+        let type_registry = world.resource::<AppTypeRegistry>();
+        let type_registry = type_registry.read();
+        let serialized_scene = scene.serialize(&type_registry).unwrap();
+
+        // Showing the scene in the console
+        info!("{}", serialized_scene);
     }
 }

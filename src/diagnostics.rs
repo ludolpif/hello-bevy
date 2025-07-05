@@ -9,8 +9,6 @@ use bevy::{
 };
 use bevy_enhanced_input::prelude::Started;
 
-use crate::userinput::Diag;
-
 // From https://bevy.org/examples/diagnostics/log-diagnostics/
 // And https://bevy.org/examples/diagnostics/enabling-disabling-diagnostic/
 // And https://bevy.org/examples/diagnostics/custom-diagnostic/
@@ -64,7 +62,7 @@ impl DiagnosticsPlugin {
         }
     }
 
-    fn toggle_diag(_trigger: Trigger<Started<Diag>>, mut store: ResMut<DiagnosticsStore>) {
+    fn toggle_diag(_trigger: Trigger<Started<crate::user_input::Diag>>, mut store: ResMut<DiagnosticsStore>) {
         info!("toggling diagnostics");
 
         for diag in store.iter_mut() {
