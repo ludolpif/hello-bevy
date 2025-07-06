@@ -1,6 +1,10 @@
+# How to contribute
+
+Please contact me before writing too much code.
+
 # Notes
 
-## Development environnement configuration
+## vim development environnement configuration
 
 On a debian trixie:
 - make sure that `sudo ./build-dep-system.sh` and `./build-dep-user.sh` have been ran
@@ -67,10 +71,11 @@ cat Cargo.toml
 
 echo /target > .gitignore
 
-editor build-dep.sh
+editor build-deps-systemwide.sh
+editor build-deps-userwide.sh
 
 editor Makefile # optionnal, small hint for non-rust developers
-sudo make build-dep-debian13
+make build-dep
 
 cargo add bevy
 
@@ -90,7 +95,7 @@ editor src/main.rs
 make # shows an empty window and a console "Hello, World!"
 
 editor README.md
-editor NOTES.md
+editor CONTRIBUTING.md
 
 git status
 git add .
@@ -124,5 +129,5 @@ editor NOTES.md
 
 git status
 git add .
-git commit -m "split main.rs creating a playground.rs module. add basic FPS overlay"
+git commit
 ```
